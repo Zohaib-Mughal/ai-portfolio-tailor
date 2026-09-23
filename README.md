@@ -34,3 +34,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## AI Tool Contract: `scoreResume`
+* **Name:** `scoreResume`
+* **Purpose:** Evaluates user-provided resume text against a target job description to generate actionable improvement metrics.
+* **Schema (Input):**
+  * `score` (number): Match score from 0 to 100.
+  * `missingKeywords` (array of strings): High-value terms present in the target role but missing from the resume.
+  * `actionPlan` (string): A single sentence detailing the most impactful change to make.
+* **Return Shape:**
+  * `{ success: boolean, score: number, missingKeywords: string[], actionPlan: string }`

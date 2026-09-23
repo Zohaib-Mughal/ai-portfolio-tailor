@@ -93,8 +93,8 @@ export default function ResumeBuilder() {
           </div>
         ))}
         
-        {/* Fallback loading indicator for initial thinking time */}
-        {isLoading && !messages[messages.length - 1]?.toolInvocations && (
+       {/* Fallback loading indicator for initial thinking time */}
+        {isLoading && !(messages[messages.length - 1] as any)?.toolInvocations && (
           <div className="text-slate-500 text-sm italic flex items-center gap-2">
             <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
             Thinking...
