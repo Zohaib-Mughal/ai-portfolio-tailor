@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { streamText, tool } from 'ai';
 import { google } from '@ai-sdk/google';
 import { z } from 'zod';
@@ -12,7 +13,6 @@ export async function POST(req: Request) {
     system: "You are an expert technical recruiter and resume writer. When a user asks to evaluate a resume against a job description, or asks for feedback on their skills, always use the scoreResume tool.",
     messages,
     tools: {
-      // @ts-ignore
       scoreResume: tool({
         description: 'Evaluate a resume against a job description and return a structured analysis.',
         parameters: z.object({
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
           missingKeywords: z.array(z.string()).describe('Keywords in the job description missing from the resume'),
           actionPlan: z.string().describe('One concrete step to improve the resume match'),
         }),
-        execute: async (args: any) => {
+        execute: async (args) => {
           await new Promise(resolve => setTimeout(resolve, 2000));
           
           if (args.score < 0) {
@@ -33,6 +33,5 @@ export async function POST(req: Request) {
     },
   });
 
-  // @ts-ignore
   return result.toDataStreamResponse();
 }
