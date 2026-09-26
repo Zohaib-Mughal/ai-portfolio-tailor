@@ -5,6 +5,13 @@ import type { UIDataTypes, UIMessage } from "ai";
 import { useEffect, useRef, useState } from "react";
 
 type ResumeTools = {
+  readMasterProfile: {
+    input: Record<string, never>;
+    output: {
+      success?: boolean;
+      fileName?: string;
+    };
+  };
   scoreResume: {
     input: {
       score: number;
@@ -151,6 +158,19 @@ export default function ResumeBuilder() {
                     >
                       {part.text}
                     </div>
+                  </div>
+                );
+              }
+
+              if (
+                part.type === "tool-readMasterProfile" &&
+                part.state === "output-available"
+              ) {
+                return (
+                  <div key={idx} className="flex justify-start">
+                    <span className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded">
+                      Master profile read
+                    </span>
                   </div>
                 );
               }
